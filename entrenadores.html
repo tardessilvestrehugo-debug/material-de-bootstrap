@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenadores - MUNDIAL FC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            font-weight: 700;
+            margin: 0 12px;
+            position: relative;
+            color: #fff !important;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .page-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .staff-card {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+            border-color: #FFA500;
+        }
+
+        .staff-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .staff-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .staff-card:hover .staff-image img {
+            transform: scale(1.1);
+        }
+
+        .staff-info {
+            padding: 25px;
+        }
+
+        .staff-name {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .staff-position {
+            color: #FFA500;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .staff-bio {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+
+        .staff-experience {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #FFD700;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .experience-item {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .experience-item strong {
+            color: #FFD700;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            border-top: 3px solid #FFD700;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-trophy"></i> MUNDIAL FC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jugadores.html"><i class="bi bi-people"></i> Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="partidos.html"><i class="bi bi-calendar-event"></i> Partidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="noticias.html"><i class="bi bi-newspaper"></i> Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html"><i class="bi bi-shop"></i> Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="entrenadores.html"><i class="bi bi-clipboard"></i> Staff</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-telephone"></i> Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Cuerpo Técnico y Staff</h1>
+
+        <!-- Cuerpo Técnico Principal -->
+        <h2 class="section-subtitle"><i class="bi bi-diagram-3"></i> Directiva Técnica</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=400&fit=crop" alt="Director Técnico">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Carlo Ancelotti</div>
+                        <div class="staff-position">Director Técnico</div>
+                        <div class="staff-bio">Entrenador legendario con experiencia en los mejores clubes de Europa.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Títulos:</strong> 4 Champions League</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 30+ años</div>
+                            <div class="experience-item"><strong>Nacionalidad:</strong> Italia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=400&fit=crop" alt="Asistente">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">José Mourinho</div>
+                        <div class="staff-position">Asistente Técnico Principal</div>
+                        <div class="staff-bio">Estratega táctico con amplia experiencia en competiciones internacionales.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Títulos:</strong> 2 Champions League</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 25+ años</div>
+                            <div class="experience-item"><strong>Nacionalidad:</strong> Portugal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=400&fit=crop" alt="Entrenador de Porteros">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Gianluigi Buffon</div>
+                        <div class="staff-position">Entrenador de Porteros</div>
+                        <div class="staff-bio">Legendario portero reconvertido en entrenador especialista.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Títulos:</strong> 1 Champions League</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 28 años como jugador</div>
+                            <div class="experience-item"><strong>Nacionalidad:</strong> Italia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff de Medicina y Fitness -->
+        <h2 class="section-subtitle"><i class="bi bi-heart-pulse"></i> Departamento Médico y Fitness</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=400&fit=crop" alt="Médico">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Dr. Rafael López</div>
+                        <div class="staff-position">Médico del Equipo</div>
+                        <div class="staff-bio">Especialista en medicina deportiva con certificaciones internacionales.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Especialidad:</strong> Medicina Deportiva</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 15 años</div>
+                            <div class="experience-item"><strong>Certificaciones:</strong> FAQR, AEMEF</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=400&fit=crop" alt="Preparador Físico">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Pedro Martín</div>
+                        <div class="staff-position">Preparador Físico</div>
+                        <div class="staff-bio">Experto en acondicionamiento físico y prevención de lesiones.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Especialidad:</strong> Preparación Física</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 18 años</div>
+                            <div class="experience-item"><strong>Máximo Nivel:</strong> Europeo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1507842591411-b8e6b0ac8b79?w=500&h=400&fit=crop" alt="Fisioterapeuta">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Ana García</div>
+                        <div class="staff-position">Jefa de Fisioterapia</div>
+                        <div class="staff-bio">Especialista en rehabilitación y recuperación de lesiones deportivas.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Especialidad:</strong> Fisioterapia Deportiva</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 12 años</div>
+                            <div class="experience-item"><strong>Equipo:</strong> 5 fisioterapeutas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análisis y Rendimiento -->
+        <h2 class="section-subtitle"><i class="bi bi-graph-up"></i> Análisis y Rendimiento</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=400&fit=crop" alt="Analista">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">David Sánchez</div>
+                        <div class="staff-position">Analista de Rendimiento</div>
+                        <div class="staff-bio">Especialista en análisis de video y datos de desempeño del equipo.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Software:</strong> Wyscout, InStat</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 10 años</div>
+                            <div class="experience-item"><strong>Analistas:</strong> 3 especialistas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=400&fit=crop" alt="Nutricionista">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Dra. María Ruiz</div>
+                        <div class="staff-position">Jefa de Nutrición</div>
+                        <div class="staff-bio">Especialista en nutrición deportiva y planes de alimentación personalizado.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Certificación:</strong> Nutrición Deportiva</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 14 años</div>
+                            <div class="experience-item"><strong>Equipo:</strong> 2 nutricionistas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=400&fit=crop" alt="Psicólogo">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Dr. Juan Ferrer</div>
+                        <div class="staff-position">Psicólogo del Deporte</div>
+                        <div class="staff-bio">Especialista en psicología del rendimiento y bienestar mental.</div>
+                        <div class="staff-experience">
+                            <div class="experience-item"><strong>Especialidad:</strong> Psicología Deportiva</div>
+                            <div class="experience-item"><strong>Experiencia:</strong> 11 años</div>
+                            <div class="experience-item"><strong>Colegiado:</strong> COP Madrid</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 style="color: #FFD700; margin-bottom: 20px;">MUNDIAL FC</h3>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="entrenadores.html">Staff</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2024 MUNDIAL FC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

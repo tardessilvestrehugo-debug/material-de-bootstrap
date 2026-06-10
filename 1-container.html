@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia - MUNDIAL FC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1a1a1a; color: #fff; }
+        .navbar { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid #FFD700; }
+        .navbar-brand { font-weight: 900; font-size: 1.8rem; background: linear-gradient(135deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family: 'Bebas Neue', cursive; letter-spacing: 2px; }
+        .nav-link { font-weight: 700; margin: 0 12px; position: relative; color: #fff !important; text-transform: uppercase; font-size: 0.9rem; }
+        .nav-link::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 3px; background: linear-gradient(135deg, #FFD700, #FFA500); transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .page-title { font-family: 'Bebas Neue', cursive; font-size: 3.5rem; color: #FFD700; text-transform: uppercase; letter-spacing: 2px; margin: 40px 0; text-align: center; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline-item { background: linear-gradient(135deg, #2d2d2d, #1a1a1a); border: 2px solid #FFD700; border-radius: 15px; padding: 30px; margin: 30px 0; display: flex; gap: 30px; align-items: center; transition: all 0.3s ease; }
+        .timeline-item:hover { box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3); transform: translateX(10px); }
+        .timeline-year { font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: #FFD700; font-weight: 900; min-width: 150px; }
+        .timeline-content h3 { color: #FFD700; margin-bottom: 10px; font-weight: 700; }
+        .timeline-content p { color: #ccc; line-height: 1.6; }
+        footer { background: linear-gradient(135deg, #000, #1a1a1a); border-top: 3px solid #FFD700; padding: 50px 20px; text-align: center; margin-top: 60px; }
+        .footer-links a { color: #FFD700; text-decoration: none; margin: 0 15px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-trophy"></i> MUNDIAL FC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jugadores.html"><i class="bi bi-people"></i> Jugadores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partidos.html"><i class="bi bi-calendar-event"></i> Partidos</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="1-container.html"><i class="bi bi-book"></i> Historia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html"><i class="bi bi-telephone"></i> Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Historia del MUNDIAL FC</h1>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1950</div>
+                <div class="timeline-content">
+                    <h3><i class="bi bi-star"></i> Fundación</h3>
+                    <p>MUNDIAL FC fue fundado en 1950 como un proyecto de integración de jugadores de diferentes nacionalidades, con el objetivo de crear un equipo competitivo a nivel mundial.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">1975</div>
+                <div class="timeline-content">
+                    <h3><i class="bi bi-trophy"></i> Primer Título</h3>
+                    <p>El equipo gana su primer campeonato internacional en 1975, consolidándose como una potencia del fútbol mundial con un juego ofensivo y atractivo.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">1995</div>
+                <div class="timeline-content">
+                    <h3><i class="bi bi-fire"></i> Era Dorada</h3>
+                    <p>Comienza la era más exitosa del club con 5 títulos consecutivos y la consolidación como una potencia mundial del fútbol.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2010</div>
+                <div class="timeline-content">
+                    <h3><i class="bi bi-stadium"></i> Nuevo Estadio</h3>
+                    <p>Se inaugura el espectacular Estadio MUNDIAL con capacidad para 95,000 espectadores, convirtiéndose en uno de los mejores del mundo.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">
+                    <h3><i class="bi bi-lightning"></i> Presente</h3>
+                    <p>El MUNDIAL FC continúa siendo un referente internacional con los mejores jugadores del mundo y una afición apasionada que lo apoya en cada partido.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h3 style="color: #FFD700; margin-bottom: 20px;">MUNDIAL FC</h3>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="1-container.html">Historia</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2024 MUNDIAL FC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

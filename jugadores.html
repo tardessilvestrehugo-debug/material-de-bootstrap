@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugadores - MUNDIAL FC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            font-weight: 700;
+            margin: 0 12px;
+            position: relative;
+            color: #fff !important;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .page-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .player-card {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .player-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+            border-color: #FFA500;
+        }
+
+        .player-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .player-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .player-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .player-name {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .player-position {
+            color: #FFA500;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #FFD700;
+        }
+
+        .stat-value {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            border-top: 3px solid #FFD700;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFA500;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-trophy"></i> MUNDIAL FC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="jugadores.html"><i class="bi bi-people"></i> Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="partidos.html"><i class="bi bi-calendar-event"></i> Partidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="noticias.html"><i class="bi bi-newspaper"></i> Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html"><i class="bi bi-shop"></i> Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeria.html"><i class="bi bi-images"></i> Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-telephone"></i> Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Nuestro Equipo</h1>
+
+        <div class="row mt-5">
+            <!-- Jugador 1 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="https://editorial.uefa.com/resources/027b-16a6f83fcf8f-179708787343-1000/cristiano_ronaldo_of_portugal_celebrates_after_scoring_a.jpeg">
+                    <div class="player-info">
+                        <div class="player-name">Cristiano Ronaldo</div>
+                        <div class="player-position">Delantero Centro | #7</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">50</div>
+                                <div class="stat-label">Goles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Asistencias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">95</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jugador 2 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="https://static01.nyt.com/images/2019/04/16/sports/16onsoccerweb-2/merlin_153612873_5bb119b9-8972-4087-b4fd-371cab8c5ba2-articleLarge.jpg?quality=75&auto=webp&disable=upscale">
+                    <div class="player-info">
+                        <div class="player-name">Lionel Messi</div>
+                        <div class="player-position">Extremo Izquierdo | #10</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">48</div>
+                                <div class="stat-label">Goles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">25</div>
+                                <div class="stat-label">Asistencias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">140</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jugador 3 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="https://estaticos.elcolombiano.com/binrepository/848x565/12c0/780d565/none/11101/TPRQ/foto-neymar-jr-el-gran-ausente-en_47447896_20250320152203.jpg" alt="Neymar">
+                    <div class="player-info">
+                        <div class="player-name">Neymar Junior</div>
+                        <div class="player-position">Extremo Derecho | #11</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">35</div>
+                                <div class="stat-label">Goles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Asistencias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">87</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jugador 4 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="data:image/jpeg;base64,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" alt="Centrocampista">
+                    <div class="player-info">
+                        <div class="player-name">Kevin De Bruyne</div>
+                        <div class="player-position">Centrocampista | #17</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">28</div>
+                                <div class="stat-label">Goles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">35</div>
+                                <div class="stat-label">Asistencias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">98</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jugador 5 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGjThiVrSGQ7ud1S8zjB8DXDAYFeEYsc-uGA&s" alt="Defensor">
+                    <div class="player-info">
+                        <div class="player-name">Sergio Ramos</div>
+                        <div class="player-position">Defensor Central | #4</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">Goles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Asistencias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">180</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jugador 6 -->
+            <div class="col-md-4">
+                <div class="player-card">
+                    <img src="data:image/jpeg;base64,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" alt="Portero">
+                    <div class="player-info">
+                        <div class="player-name">Manuel Neuer</div>
+                        <div class="player-position">Portero | #1</div>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">89</div>
+                                <div class="stat-label">Paradas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">42</div>
+                                <div class="stat-label">Limpias</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Partidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 style="color: #FFD700; margin-bottom: 20px;">MUNDIAL FC</h3>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="jugadores.html">Jugadores</a>
+                <a href="partidos.html">Partidos</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2024 MUNDIAL FC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

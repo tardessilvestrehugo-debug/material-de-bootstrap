@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partidos - MUNDIAL FC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            font-weight: 700;
+            margin: 0 12px;
+            position: relative;
+            color: #fff !important;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .page-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .match-card {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        .match-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+            border-color: #FFA500;
+        }
+
+        .match-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .match-date {
+            color: #FFA500;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .match-teams {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .team-info {
+            text-align: center;
+        }
+
+        .team-name {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 2rem;
+        }
+
+        .score {
+            text-align: center;
+        }
+
+        .score-text {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin: 0;
+        }
+
+        .match-status {
+            color: #FFA500;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .match-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-label {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        .result {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .result.win {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .result.draw {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+
+        .result.loss {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: 2px solid #FFD700;
+            background: transparent;
+            color: #FFD700;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: black;
+        }
+
+        .tab-btn:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            border-top: 3px solid #FFD700;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .match-teams {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-trophy"></i> MUNDIAL FC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jugadores.html"><i class="bi bi-people"></i> Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="partidos.html"><i class="bi bi-calendar-event"></i> Partidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="noticias.html"><i class="bi bi-newspaper"></i> Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html"><i class="bi bi-shop"></i> Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeria.html"><i class="bi bi-images"></i> Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-telephone"></i> Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Calendario de Partidos</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="mostrarTab('proximos')">Próximos</button>
+            <button class="tab-btn" onclick="mostrarTab('resultados')">Resultados</button>
+        </div>
+
+        <!-- Próximos Partidos -->
+        <div id="proximos">
+            <div class="match-card">
+                <div class="match-date">📅 20 de Mayo - 20:00</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">Bayer Munich</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">VS</p>
+                        <p class="match-status">Por Jugar</p>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Real Madrid</div>
+                        <div class="team-logo"><i class="bi bi-star"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Estadio</div>
+                        <div class="detail-value">Bernabéu</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Árbitro</div>
+                        <div class="detail-value">Carlos del Cerro</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">TV</div>
+                        <div class="detail-value">ESPN+</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-date">📅 25 de Mayo - 19:00</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">Barcelona</div>
+                        <div class="team-logo"><i class="bi bi-shield"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">VS</p>
+                        <p class="match-status">Por Jugar</p>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Benfica</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Estadio</div>
+                        <div class="detail-value">Camp Nou</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Árbitro</div>
+                        <div class="detail-value">Mateu Lahoz</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">TV</div>
+                        <div class="detail-value">DAZN</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-date">📅 30 de Mayo - 21:00</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">PSG</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">VS</p>
+                        <p class="match-status">Por Jugar</p>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Manchester City</div>
+                        <div class="team-logo"><i class="bi bi-circle"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Estadio</div>
+                        <div class="detail-value">Etihad Stadium</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Árbitro</div>
+                        <div class="detail-value">Andre Marriner</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">TV</div>
+                        <div class="detail-value">Sky Sports</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados -->
+        <div id="resultados" style="display: none;">
+            <div class="match-card">
+                <div class="match-date">📅 15 de Mayo</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">MUNDIAL FC</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">2 - 1</p>
+                        <span class="result win">VICTORIA</span>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Atlético Madrid</div>
+                        <div class="team-logo"><i class="bi bi-diamond"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Goles</div>
+                        <div class="detail-value">Ronaldo (45'), Messi (67')</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Espectadores</div>
+                        <div class="detail-value">89,000</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Pase de Gol</div>
+                        <div class="detail-value">De Bruyne</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-date">📅 10 de Mayo</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">Manchester United</div>
+                        <div class="team-logo"><i class="bi bi-heart"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">3 - 3</p>
+                        <span class="result draw">EMPATE</span>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">MUNDIAL FC</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Goles</div>
+                        <div class="detail-value">Messi (12'), Neymar (55'), Ronaldo (78')</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Espectadores</div>
+                        <div class="detail-value">76,500</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Tarjetas</div>
+                        <div class="detail-value">2 Amarillas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-date">📅 05 de Mayo</div>
+                <div class="match-teams">
+                    <div class="team-info">
+                        <div class="team-name">MUNDIAL FC</div>
+                        <div class="team-logo"><i class="bi bi-trophy-fill"></i></div>
+                    </div>
+                    <div class="score">
+                        <p class="score-text">4 - 2</p>
+                        <span class="result win">VICTORIA</span>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Juventus</div>
+                        <div class="team-logo"><i class="bi bi-square"></i></div>
+                    </div>
+                </div>
+                <div class="match-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Goles</div>
+                        <div class="detail-value">Ronaldo (22', 61'), De Bruyne (40'), Messi (89')</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Espectadores</div>
+                        <div class="detail-value">95,000</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Posesión</div>
+                        <div class="detail-value">62%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 style="color: #FFD700; margin-bottom: 20px;">MUNDIAL FC</h3>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="jugadores.html">Jugadores</a>
+                <a href="partidos.html">Partidos</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2024 MUNDIAL FC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarTab(tab) {
+            document.getElementById('proximos').style.display = tab === 'proximos' ? 'block' : 'none';
+            document.getElementById('resultados').style.display = tab === 'resultados' ? 'block' : 'none';
+
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

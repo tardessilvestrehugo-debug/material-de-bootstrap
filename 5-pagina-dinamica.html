@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Dinámica - Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Partículas animadas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Navbar mejorada */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            margin: 0 10px;
+            position: relative;
+            color: #333 !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Botones animados */
+        .btn-custom {
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            transition: all 0.3s ease;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-custom:hover::before {
+            left: 0;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Secciones */
+        section {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            border-radius: 2px;
+        }
+
+        /* Tarjetas dinámicas */
+        .card-dynamic {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card-dynamic::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(238, 119, 82, 0.1), rgba(231, 60, 126, 0.1));
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+
+        .card-dynamic:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-dynamic:hover::before {
+            top: -25%;
+            right: -25%;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .card-text {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Galería */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 250px;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contador animado */
+        .counter {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ee7752, #e73c7e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ee7752;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-dynamic {
+                margin: 15px 0;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-bootstrap"></i> DOSTIN BOOTSTRAP
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i> INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="1-container.html"><i class="bi bi-box"></i> CONTENEDOR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="2-columnas.html"><i class="bi bi-columns-gap"></i> COLUMNAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="3-breakpoints.html"><i class="bi bi-phone"></i> BREAKPOINTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="4-margin.html"><i class="bi bi-distribute-vertical"></i> MARGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="5-pagina-dinamica.html"><i class="bi bi-star"></i> DINÁMICA</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido al Futuro</h1>
+            <p>Descubre el poder de Bootstrap con animaciones y diseño moderno</p>
+            <button class="btn-custom" onclick="scrollToSection('features')">Explorar</button>
+            <button class="btn-custom" onclick="scrollToSection('gallery')">Ver Galería</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-light" id="features">
+        <div class="container">
+            <h2 class="section-title">Características Principales</h2>
+            <div class="row mt-5">
+                <div class="col-md-4 text-center fade-in">
+                    <div class="card-dynamic">
+                        <div class="card-icon"><i class="bi bi-lightning-fill"></i></div>
+                        <h3 class="card-title">Rápido</h3>
+                        <p class="card-text">Rendimiento optimizado con animaciones suaves y transiciones fluidas que hacen que tu sitio se vea profesional.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center fade-in">
+                    <div class="card-dynamic">
+                        <div class="card-icon"><i class="bi bi-palette-fill"></i></div>
+                        <h3 class="card-title">Diseño Moderno</h3>
+                        <p class="card-text">Colores vibrantes, tipografía moderna y efectos visuales que capturan la atención de tu audiencia.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center fade-in">
+                    <div class="card-dynamic">
+                        <div class="card-icon"><i class="bi bi-phone"></i></div>
+                        <h3 class="card-title">Responsivo</h3>
+                        <p class="card-text">Se adapta perfectamente a cualquier dispositivo, desde móviles hasta pantallas de escritorio grandes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-dark text-white" style="background: rgba(0, 0, 0, 0.8); position: relative; z-index: 1;">
+        <div class="container">
+            <h2 class="section-title text-white">Estadísticas</h2>
+            <div class="row mt-5 text-center">
+                <div class="col-md-3 fade-in">
+                    <div class="counter" id="counter1">0</div>
+                    <p>Proyectos</p>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="counter" id="counter2">0</div>
+                    <p>Clientes Felices</p>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="counter" id="counter3">0</div>
+                    <p>Líneas de Código</p>
+                </div>
+                <div class="col-md-3 fade-in">
+                    <div class="counter" id="counter4">0</div>
+                    <p>Años de Experiencia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="bg-light" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Galería de Ejemplos</h2>
+            <div class="row mt-5">
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <span><i class="bi bi-palette me-2"></i> Diseño Moderno</span>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <span><i class="bi bi-code-slash me-2"></i> Código Limpio</span>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <span><i class="bi bi-rocket me-2"></i> Alto Rendimiento</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section style="background: linear-gradient(135deg, #ee7752, #e73c7e); padding: 80px 20px; position: relative; z-index: 1;">
+        <div class="container text-center text-white">
+            <h2 class="section-title text-white">Suscríbete a Nuestro Newsletter</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 30px;">Recibe las últimas actualizaciones y tutoriales directamente en tu correo</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Tu email aquí..." style="padding: 12px; border-radius: 50px 0 0 50px; border: none;">
+                        <button class="btn btn-light" style="border-radius: 0 50px 50px 0; font-weight: 600;">Suscribir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 style="margin-bottom: 20px;">DOSTIN BOOTSTRAP</h3>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="#features">Características</a>
+                <a href="#gallery">Galería</a>
+                <a href="mailto:contacto@dostin.com">Contacto</a>
+            </div>
+            <div style="margin: 20px 0;">
+                <a href="#" style="color: #ee7752; margin: 0 10px;"><i class="bi bi-facebook"></i></a>
+                <a href="#" style="color: #e73c7e; margin: 0 10px;"><i class="bi bi-twitter"></i></a>
+                <a href="#" style="color: #23a6d5; margin: 0 10px;"><i class="bi bi-instagram"></i></a>
+                <a href="#" style="color: #23d5ab; margin: 0 10px;"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">&copy; 2024 DOSTIN BOOTSTRAP. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Generar partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.fade-in');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Contador animado
+        function animateCounter(element, target, duration = 2000) {
+            let current = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Activar contadores cuando se vea la sección
+        function activateCounters() {
+            const statsSection = document.querySelector('[style*="background: rgba(0, 0, 0, 0.8)"]');
+            if (statsSection) {
+                const sectionTop = statsSection.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight && !statsSection.dataset.activated) {
+                    statsSection.dataset.activated = 'true';
+                    animateCounter(document.getElementById('counter1'), 150);
+                    animateCounter(document.getElementById('counter2'), 500);
+                    animateCounter(document.getElementById('counter3'), 10000);
+                    animateCounter(document.getElementById('counter4'), 8);
+                }
+            }
+        }
+
+        // Scroll a sección
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Activar navbar sticky
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            activateCounters();
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            revealOnScroll();
+        });
+
+        // Efecto de clic en tarjetas
+        document.querySelectorAll('.card-dynamic').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.animation = 'none';
+                setTimeout(() => {
+                    card.style.animation = '';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
